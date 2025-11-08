@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:football_shop/widgets/left_drawer.dart';
+import 'package:football_shop/screens/product_form.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -36,8 +38,10 @@ class MyHomePage extends StatelessWidget {
         // Warna latar belakang AppBar diambil dari skema warna tema aplikasi.
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
+      drawer: const LeftDrawer(),
       // Body halaman dengan padding di sekelilingnya.
-      body: Padding(
+      body: SingleChildScrollView(
+        child : Padding(
         padding: const EdgeInsets.all(16.0),
         // Menyusun widget secara vertikal dalam sebuah kolom.
         child: Column(
@@ -94,6 +98,7 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
+    )
     );
   }
 }
@@ -124,11 +129,18 @@ class ItemCard extends StatelessWidget {
                 content: Text("Kamu telah menekan tombol ${item.name}!"),
               ),
             );
-        },
-        // Container untuk menyimpan Icon dan Text
-        child: Container(
-          padding: const EdgeInsets.all(8),
-          child: Center(
+
+            if (item.name == "Create Product") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProductFormPage()),
+              );
+            }
+          },
+          // Container untuk menyimpan Icon dan Text
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            child: Center(
             child: Column(
               // Menyusun ikon dan teks di tengah kartu.
               mainAxisAlignment: MainAxisAlignment.center,
